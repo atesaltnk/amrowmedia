@@ -40,8 +40,8 @@ export function ServicesList() {
       <SectionHead
         index="02"
         eyebrow="What we make"
-        title={<span id="services-heading">Six things, done properly.</span>}
-        lead="We are deliberately not a full-service anything. This is the list, and everything on it is something we do often enough to be genuinely good at."
+        title={<span id="services-heading">Five things, done properly.</span>}
+        lead="Deliberately not a full-service anything. This is the list, and everything on it is something I shoot often enough to be genuinely good at."
       />
 
       <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:gap-16">

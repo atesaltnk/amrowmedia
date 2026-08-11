@@ -127,8 +127,8 @@ export default async function CaseStudy({
               [
                 ["The brief", project.brief],
                 ["What made it hard", project.constraint],
-                ["What we did", project.approach],
-                ["What happened", project.outcome],
+                ["What I did", project.approach],
+                ["What they got", project.outcome],
               ] as const
             ).map(([heading, body], i) => (
               <Reveal

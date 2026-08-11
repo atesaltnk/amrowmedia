@@ -49,7 +49,9 @@ export default function OpengraphImage() {
             AMROW
           </span>
           <span style={{ fontSize: 20, letterSpacing: 3, color: "#6b6862" }}>
-            {site.contact.city.toUpperCase()}, {site.contact.region}
+            {site.contact.city
+              ? `${site.contact.city.toUpperCase()}, ${site.contact.region}`
+              : "PHOTO & VIDEO"}
           </span>
         </div>
 
@@ -64,8 +66,8 @@ export default function OpengraphImage() {
               maxWidth: 940,
             }}
           >
-            We shoot the moment the room goes{" "}
-            <span style={{ color: "#ff8f3f" }}>quiet.</span>
+            I get the shot when the room is{" "}
+            <span style={{ color: "#ff8f3f" }}>chaos.</span>
           </span>
           <span style={{ marginTop: 28, fontSize: 26, color: "#a8a49c" }}>
             {site.tagline}

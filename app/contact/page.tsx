@@ -8,7 +8,7 @@ import { Faq } from "@/components/sections/faq";
 
 export const metadata: Metadata = {
   title: "Start a project",
-  description: `Book Amrow Media for video or photo production in Nashville. Tell us what the project has to achieve and we will reply within one business day with a straight answer on cost and fit.`,
+  description: `Book AMRow Media for photo or video. Tell me what the project has to achieve and you will get a reply within one business day with a straight answer on cost and fit.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -29,9 +29,10 @@ export default function ContactPage() {
           />
           <Reveal delay={0.15}>
             <p className="t-lead mt-8 max-w-2xl text-pretty">
-              The more specific you are about the outcome, the more useful the
+              The more specific you are about the outcome, the more useful my
               reply. If you already know the budget, say so — it is the fastest
-              way to a real answer rather than a discovery call.
+              way to a real answer. And if you have never hired a photographer
+              before, that is completely normal; just tell me what it is for.
             </p>
           </Reveal>
         </div>
@@ -110,9 +111,9 @@ export default function ContactPage() {
               <div className="material-card rounded-xl p-6">
                 <h2 className="t-slate mb-3 text-tungsten">Before you write</h2>
                 <p className="t-body text-[0.9375rem]">
-                  Most enquiries land between $2,500 and $15,000. If your budget
-                  is under that, say so anyway — we keep space each month for
-                  first releases and artist-owned projects at a reduced rate.
+                  Most bookings land between $450 and $1,200. If your budget is
+                  under that, say so anyway — I keep space each month for first
+                  releases and people just getting started.
                 </p>
               </div>
             </div>

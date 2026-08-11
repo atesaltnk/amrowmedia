@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useReduced } from "@/hooks/use-reduced-motion";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
+import { promises } from "@/lib/site";
 
 /* ============================================================================
    MANIFESTO — scroll-scrubbed line highlight
@@ -18,18 +19,13 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
    anyone actually read it instead of skimming past.
    ========================================================================== */
 
+/* Her own motto, broken into scroll-revealed lines. It is abstract on its own —
+   which is exactly why the paragraph underneath grounds it in what that
+   actually means on a shoot day. */
 const LINES = [
-  "Most production companies",
-  "sell you a camera package.",
-  "We sell you the reason",
-  "someone should care.",
-];
-
-const NUMBERS = [
-  { value: "7 yrs", label: "Shooting in Nashville" },
-  { value: "260+", label: "Films delivered" },
-  { value: "94%", label: "Clients who book again" },
-  { value: "2 wks", label: "Typical delivery" },
+  "Enhancing",
+  "your dreams",
+  "into reality.",
 ];
 
 function Line({
@@ -93,10 +89,11 @@ export function Manifesto() {
 
         <Reveal delay={0.1}>
           <p className="t-lead mt-12 max-w-2xl text-pretty">
-            A film that looks expensive and says nothing is the most expensive
-            thing you can buy. We start every project by working out the
-            argument it has to win — and if the honest answer is that you do not
-            need a film, we will tell you that on the first call, for free.
+            In practice that means showing up for the people who are still
+            building the thing — a treat company at their first big expo, a band
+            with one van and a release date, a founder who needs a photograph
+            that does not look like a stock photograph. I am one person, so you
+            get the same person on the shoot, in the edit and on the email.
           </p>
         </Reveal>
 
@@ -107,7 +104,7 @@ export function Manifesto() {
           className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4"
           stagger={0.08}
         >
-          {NUMBERS.map((n) => (
+          {promises.map((n) => (
             <StaggerItem as="li" key={n.label}>
               <span className="block text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-none tracking-[-0.035em] text-tungsten">
                 {n.value}

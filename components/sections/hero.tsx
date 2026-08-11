@@ -28,7 +28,11 @@ import { Button } from "@/components/ui/button";
    viewport can carry it. Nothing above the fold competes with it.
    ========================================================================== */
 
-const WORDS = ["We shoot", "the moment", "the room", "goes quiet."];
+/* ⚠️ Drafted headline — see `site.promise` in lib/site.ts for the reasoning.
+   Split into lines by hand so the break points are deliberate rather than
+   whatever the container width happens to produce. The final word is the one
+   that carries the accent colour, so it has to be the word worth stressing. */
+const WORDS = ["I get", "the shot", "when the room", "is chaos."];
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -94,13 +98,15 @@ export function Hero() {
         <div className="flex h-full flex-col justify-between">
           <div className="flex justify-between">
             <span className="t-slate text-ink-2">
-              {site.contact.city}, {site.contact.region}
+              {site.contact.city
+                ? `${site.contact.city}, ${site.contact.region}`
+                : site.motto}
             </span>
-            <span className="t-slate text-ink-2">A-CAM · 4K · 24 FPS</span>
+            <span className="t-slate text-ink-2">Photo · Video</span>
           </div>
           <div className="flex justify-between">
-            <span className="t-slate text-ink-2">ƒ/1.4 · 1/48 · ISO 800</span>
-            <span className="t-slate text-ink-2">Est. 2019</span>
+            <span className="t-slate text-ink-2">ƒ/1.4 · 1/250 · ISO 3200</span>
+            <span className="t-slate text-ink-2">One operator</span>
           </div>
         </div>
       </motion.div>
@@ -142,8 +148,8 @@ export function Hero() {
                 >
                   {i === WORDS.length - 1 ? (
                     <>
-                      {word.replace("quiet.", "")}
-                      <span className="text-tungsten">quiet.</span>
+                      {word.replace("chaos.", "")}
+                      <span className="text-tungsten">chaos.</span>
                     </>
                   ) : (
                     word

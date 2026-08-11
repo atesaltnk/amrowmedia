@@ -55,10 +55,10 @@ export function ReelStrip() {
           eyebrow="Selected work"
           title={
             <span id="work-heading">
-              Six projects that had a<br className="hidden sm:block" /> job to do.
+              Six jobs that had a<br className="hidden sm:block" /> job to do.
             </span>
           }
-          lead="Every one of these is a case study — the brief, the constraint that made it hard, and what happened afterwards. Pretty frames are table stakes."
+          lead="Each one opens into the whole story — what it was for, what made it difficult on the day, and what came back. A good frame proves I can use a camera; the rest proves the day will go well."
         />
       </div>
 

@@ -62,15 +62,15 @@ export function Cta() {
 
         <Split
           as="h2"
-          text="Tell us what it has to do."
+          text="Tell me what it has to do."
           className="t-display mt-8 text-balance"
         />
 
         <Reveal delay={0.15}>
           <p className="t-lead mx-auto mt-8 max-w-xl text-pretty">
-            Thirty minutes, no deck, no discovery invoice. You leave the call
-            knowing what it costs and whether we are the right studio for it —
-            including when we are not.
+            No deck, no discovery invoice, no agency runaround. You get a
+            straight answer on cost and fit — including the times the honest
+            answer is that you do not need me yet.
           </p>
         </Reveal>
 
@@ -87,8 +87,7 @@ export function Cta() {
 
         <Reveal delay={0.35}>
           <p className="t-slate mt-10 text-ink-3">
-            Typical reply within one business day · {site.contact.city},{" "}
-            {site.contact.region}
+            Reply within one business day · {site.contact.email}
           </p>
         </Reveal>
       </div>

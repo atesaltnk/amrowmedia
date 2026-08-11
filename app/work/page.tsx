@@ -5,7 +5,7 @@ import { Cta } from "@/components/sections/cta";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected video and photography projects from Amrow Media — brand films, music videos, live sessions, commercial campaigns and editorial photography made in Nashville.",
+    "Selected event, concert, branding and product work by AMRow Media — photography and video for small businesses, musicians and individuals.",
   alternates: { canonical: "/work" },
 };
 

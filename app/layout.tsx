@@ -14,15 +14,19 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  /* ⚠️ Once `site.contact.city` is set, prefix the first four of these with it
+     ("<city> event photographer", …). Location-qualified terms are how this
+     work is actually searched for, and right now the site cannot compete on
+     them at all because it never says where it is. */
   keywords: [
-    "Nashville videographer",
-    "Nashville video production",
-    "Nashville photographer",
-    "music video production Nashville",
-    "brand film Nashville",
-    "commercial video production Tennessee",
-    "live session filming",
-    "event videographer Nashville",
+    "event photographer",
+    "event videographer",
+    "concert photographer",
+    "live music photographer",
+    "small business branding photography",
+    "product photography",
+    "expo and convention photographer",
+    "content day photographer",
   ],
   authors: [{ name: site.name }],
   creator: site.name,
@@ -53,48 +57,71 @@ export const viewport: Viewport = {
 };
 
 /**
- * LocalBusiness structured data.
+ * Structured data.
  *
- * This is the highest-leverage twenty lines on the whole site. A production
- * studio's buyers search "videographer near me" — without this, the business
- * is invisible to the map pack and to every AI answer engine, no matter how
- * good the films are.
+ * This is the highest-leverage block on the whole site. Buyers search
+ * "event photographer near me" — without this, the business is invisible to
+ * the map pack and to every AI answer engine no matter how good the work is.
+ *
+ * ⚠️ It degrades honestly: with no location set in lib/site.ts it publishes as
+ * a plain Organization rather than a LocalBusiness, because a LocalBusiness
+ * with an empty address is worse than none — it is an invalid entity that
+ * search engines will discard and that can suppress the whole block. Fill in
+ * `site.contact.city` and it upgrades itself automatically.
  */
 function StructuredData() {
+  const hasLocation = Boolean(site.contact.city && site.contact.region);
+  const hasGeo = site.contact.geo.lat !== 0 || site.contact.geo.lng !== 0;
+
   const json = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "ProfessionalService"],
+    "@type": hasLocation
+      ? ["LocalBusiness", "ProfessionalService"]
+      : "Organization",
     "@id": `${site.domain}/#business`,
     name: site.name,
     legalName: site.legalName,
     description: site.description,
     url: site.domain,
     email: site.contact.email,
-    telephone: site.contact.phone,
-    priceRange: "$$$",
+    founder: { "@type": "Person", name: site.owner },
     image: `${site.domain}/opengraph-image`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: site.contact.city,
-      addressRegion: site.contact.region,
-      postalCode: site.contact.postalCode,
-      addressCountry: site.contact.country,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: site.contact.geo.lat,
-      longitude: site.contact.geo.lng,
-    },
-    areaServed: site.serviceArea
-      .filter((a) => a !== "Anywhere the job is")
-      .map((a) => ({ "@type": "City", name: a })),
+    ...(site.contact.phone ? { telephone: site.contact.phone } : {}),
+    ...(hasLocation
+      ? {
+          priceRange: "$$",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: site.contact.city,
+            addressRegion: site.contact.region,
+            ...(site.contact.postalCode
+              ? { postalCode: site.contact.postalCode }
+              : {}),
+            addressCountry: site.contact.country,
+          },
+        }
+      : {}),
+    ...(hasGeo
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: site.contact.geo.lat,
+            longitude: site.contact.geo.lng,
+          },
+        }
+      : {}),
+    ...(site.serviceArea.length
+      ? {
+          areaServed: site.serviceArea.map((a) => ({ "@type": "City", name: a })),
+        }
+      : {}),
     sameAs: site.social.map((s) => s.href),
     knowsAbout: [
-      "Video production",
-      "Music video direction",
-      "Commercial photography",
-      "Live event filming",
-      "Colour grading",
+      "Event photography",
+      "Concert and live music photography",
+      "Brand and product photography",
+      "Videography",
+      "Portrait photography",
     ],
   };
 

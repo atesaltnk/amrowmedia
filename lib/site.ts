@@ -1,79 +1,99 @@
 /* ============================================================================
    SITE CONFIGURATION — single source of truth
    ----------------------------------------------------------------------------
-   Every phone number, price, address and piece of headline copy on the site
-   comes from this file. Nothing is hardcoded into a component. Change a rate
-   here and it updates on the pricing page, the JSON-LD, and the contact form
-   budget selector at once.
+   Every contact detail, price and piece of headline copy comes from this file.
+   Nothing is hardcoded into a component.
 
-   ⚠️  REVIEW BEFORE LAUNCH — contact details and pricing below are drafted
-       placeholders. Replace with the studio's real figures.
+   VOICE: first person singular. AMRow Media is Alex — one person who shoots,
+   edits, grades and delivers. The existing site is written as "I" and "me"
+   ("Follow me on Instagram"), and that is a genuine competitive advantage
+   against studios that hide behind "we". Do not let this drift into "we".
+
+   ⚠️  MARKED ⚠️ below = drafted copy awaiting Alex's approval, or a value only
+       she can supply. Everything unmarked is taken from the live site.
    ========================================================================== */
 
 export const site = {
-  name: "Amrow Media",
-  legalName: "Amrow Media LLC",
-  tagline: "Nashville video & photo production",
+  name: "AMRow Media",
+  legalName: "AMRow Media",
+  owner: "Alex",
+  tagline: "Events · Concerts · Branding · & more",
+
+  /** Her own motto, from the live site. Kept deliberately — it is her brand. */
+  motto: "Enhancing your dreams into reality",
+
+  /** ⚠️ Drafted headline. Built from the Renegade Pets testimonial, which is
+   *  the sharpest real evidence on the current site: she got the shot at a
+   *  packed, hot, intermittently raining outdoor event. That is the thing
+   *  worth leading with — it is specific, provable, and nobody else claims it. */
+  promise: "I get the shot when the room is chaos.",
+
   domain: "https://amrowmedia.com",
 
-  /** The positioning line. Everything else on the site is evidence for it. */
-  promise: "We shoot the moment the room goes quiet.",
-
   description:
-    "Amrow Media is a Nashville video and photo production studio making brand films, music videos, live sessions and stills for artists, labels and companies who need the work to feel like something.",
+    "AMRow Media is Alex — a photographer and videographer covering events, concerts, branding and product work for small businesses, musicians and individuals. One person, start to finish.",
 
   contact: {
-    email: "hello@amrowmedia.com",
-    bookingEmail: "book@amrowmedia.com",
-    phone: "+1 (615) 555-0142",
-    phoneHref: "tel:+16155550142",
-    city: "Nashville",
-    region: "TN",
-    regionName: "Tennessee",
+    email: "amrowmedia@gmail.com",
+    /** Same inbox — kept as a separate key so a booking alias can be added
+     *  later without touching every component. */
+    bookingEmail: "amrowmedia@gmail.com",
+    /** ⚠️ No phone number is published on the live site. Add one here to make
+     *  it appear in the footer, contact page and structured data, or leave it
+     *  empty and those blocks omit themselves.
+     *
+     *  These are annotated `as string` rather than left to `as const` on
+     *  purpose: an empty literal type narrows every `city ? … : …` check to
+     *  `never` and the compiler rejects the filled-in branch you are about to
+     *  write. Widening them keeps both branches valid. */
+    phone: "" as string,
+    phoneHref: "" as string,
+
+    /** ⚠️ BLOCKING FOR LOCAL SEO — the live site never states a location.
+     *  That is the single biggest discoverability gap: "photographer near me"
+     *  is how this work gets found and right now the site cannot answer it.
+     *  Fill these in and the LocalBusiness structured data starts working. */
+    city: "" as string,
+    region: "" as string,
+    regionName: "" as string,
     country: "US",
-    /** Studio address — used for LocalBusiness structured data. */
     street: "By appointment",
-    postalCode: "37203",
-    /** Downtown Nashville. Update to the real studio coordinates. */
-    geo: { lat: 36.1627, lng: -86.7816 },
+    postalCode: "" as string,
+    geo: { lat: 0 as number, lng: 0 as number },
   },
 
   social: [
     { label: "Instagram", handle: "@amrowmedia", href: "https://instagram.com/amrowmedia" },
-    { label: "Vimeo", handle: "amrowmedia", href: "https://vimeo.com/amrowmedia" },
-    { label: "YouTube", handle: "@amrowmedia", href: "https://youtube.com/@amrowmedia" },
   ],
 
-  /** Where we actually work. Drives the "travel" answer and local SEO. */
-  serviceArea: [
-    "Nashville",
-    "Franklin",
-    "Memphis",
-    "Chattanooga",
-    "Knoxville",
-    "Atlanta",
-    "Louisville",
-    "Anywhere the job is",
-  ],
+  /** ⚠️ Travel radius — replace with the real answer. This drives both the
+   *  FAQ and the areaServed structured data. */
+  serviceArea: [] as string[],
 
-  hours: "Mon–Fri 9:00–18:00 CT · Shoot days are whenever the light is right",
+  /** ⚠️ Drafted. */
+  hours: "Replies within one business day · Shoot days by arrangement",
 } as const;
 
 /* ---------------------------------------------------------------------------
    NAVIGATION
-   Labels name their contents. "Work", "Services", "Studio" — never "Home" or
-   an umbrella nobody can predict the contents of.
    ------------------------------------------------------------------------- */
 
 export const nav = [
   { label: "Work", href: "/work", index: "01" },
   { label: "Services", href: "/services", index: "02" },
-  { label: "Studio", href: "/about", index: "03" },
-  { label: "Start a project", href: "/contact", index: "04" },
+  { label: "About", href: "/about", index: "03" },
+  { label: "Get in touch", href: "/contact", index: "04" },
 ] as const;
 
 /* ---------------------------------------------------------------------------
    SERVICES
+   Built from what the live portfolio actually shows: expos and conventions,
+   live music, product and brand work for pet-food companies, food and
+   hospitality, portraits, and documentary coverage of makers.
+
+   The live site says "EVENTS | CONCERTS | BRANDING | & MORE". That is the
+   right order of priority — it is preserved here, with the "& more" broken
+   out into the things the portfolio proves she already does.
    ------------------------------------------------------------------------- */
 
 export type Service = {
@@ -83,117 +103,102 @@ export type Service = {
   line: string;
   body: string;
   deliverables: string[];
-  /** Used for the colour grade of the section's generated still. */
   grade: "tungsten" | "teal" | "bleach" | "night";
 };
 
 export const services: Service[] = [
   {
-    slug: "music",
+    slug: "events",
     index: "01",
-    title: "Music & Artist",
-    line: "Music videos, live sessions, EPKs, press stills.",
+    title: "Events",
+    line: "Expos, conventions, festivals, community days.",
     body:
-      "This is Nashville. Half of what we shoot has a guitar in it. We work the way artist teams actually work — fast turnarounds around tour dates, deliverables cut for every platform, and a set that a nervous artist can relax on.",
+      "Big rooms, bad light, thousands of people and no second chances. This is the work I am best at — moving through a packed floor and coming back with the frames that make the day look the way it felt. Weather, crowds and a schedule that slipped are all normal and none of them change the delivery.",
     deliverables: [
-      "Music video (1×90–240s)",
-      "Live session films (2–4 songs)",
-      "Vertical performance cuts",
-      "EPK / press kit film",
-      "Artist press stills",
-    ],
-    grade: "tungsten",
-  },
-  {
-    slug: "brand",
-    index: "02",
-    title: "Brand Films",
-    line: "The film a company shows when it needs to be believed.",
-    body:
-      "Founder stories, manifestos, recruitment films, launch pieces. We start with the argument the film has to win, not the shot list. If a talking head is the wrong answer we will say so before you have paid for a crew.",
-    deliverables: [
-      "Hero film (60–180s)",
-      "Cutdowns (30s / 15s / 6s)",
-      "Vertical & square masters",
-      "Interview transcripts",
-      "Stills from the shoot day",
+      "Full event photo gallery",
+      "Highlight film (60–90s)",
+      "Social clips within 24 hours",
+      "Vertical cuts for stories & reels",
+      "Exhibitor and booth coverage",
     ],
     grade: "teal",
   },
   {
-    slug: "commercial",
-    index: "03",
-    title: "Commercial & Social",
-    line: "Ad creative built for the feed, not retrofitted to it.",
+    slug: "concerts",
+    index: "02",
+    title: "Concerts & Live Music",
+    line: "Shows, sets, press stills, tour content.",
     body:
-      "Performance creative that is designed vertical-first, with the hook in the first eighteen frames. We shoot in batches so a single day yields a month of assets, which is the only way the maths works on social spend.",
+      "Venue lighting is not a problem to be fixed, it is the look. I shoot for the dark rather than fighting it, and I stay out of the way — no flash in a performer's eyes, no climbing on the monitors. Bands get press-ready stills and cut-down clips they can post before the load-out is finished.",
     deliverables: [
-      "Batch of 6–20 social assets",
-      "Hook variants for testing",
-      "9:16, 4:5 and 1:1 masters",
-      "Captions & subtitle files",
-      "Static frames for paid",
-    ],
-    grade: "bleach",
-  },
-  {
-    slug: "events",
-    index: "04",
-    title: "Events & Live",
-    line: "Conferences, festivals, tour nights, launches.",
-    body:
-      "Multi-camera coverage with a same-week sizzle so the momentum is not gone before the edit lands. We have shot rooms of nine and rooms of nine thousand, and the discipline is identical: get the moment, do not become the moment.",
-    deliverables: [
-      "Same-week sizzle (60–90s)",
-      "Full-length session recordings",
-      "Multi-cam speaker edits",
-      "Event photography gallery",
-      "Social clips within 24h",
+      "Full set photography",
+      "Performance video cuts",
+      "Press & promo stills",
+      "Vertical clips for release day",
+      "Venue and crowd coverage",
     ],
     grade: "night",
   },
   {
-    slug: "photo",
-    index: "05",
-    title: "Photography",
-    line: "Portrait, editorial, product, documentary.",
+    slug: "branding",
+    index: "03",
+    title: "Branding & Product",
+    line: "Product shots, brand libraries, packaging, campaigns.",
     body:
-      "Stills are not the consolation prize on a video shoot. They get their own lighting plan, their own time on the schedule, and a retoucher who knows the difference between clean and plastic.",
+      "Small businesses rarely need one photograph — they need a library they can draw on for six months without repeating themselves. So I shoot in batches: one planned day, a set of looks, and a folder of assets sized for every place you actually post.",
     deliverables: [
-      "Retouched selects (25–150)",
-      "Full contact sheet",
-      "Web & print resolutions",
-      "Usage licence in writing",
-      "48h turnaround on selects",
+      "Batch of 20–40 finished assets",
+      "Packaging & product detail shots",
+      "Lifestyle and in-use frames",
+      "9:16, 4:5 and 1:1 crops",
+      "Static frames for paid social",
     ],
     grade: "bleach",
   },
   {
-    slug: "weddings",
-    index: "06",
-    title: "Weddings",
-    line: "One film. Made like a film.",
+    slug: "portraits",
+    index: "04",
+    title: "Portraits & Personal Brand",
+    line: "Headshots, artist press, founders, makers.",
     body:
-      "We take a small number of weddings a year and treat each one like a short. No drone-over-the-venue template, no cliché first-look montage cut to a licensed pop song. The day as it happened, in the order it happened.",
+      "Most people tell me they hate being photographed. That is fine — it is my job to make the session short, specific and not weird. I shoot people while they are talking or working rather than posing, which is why the results look like the person their friends know.",
     deliverables: [
-      "Feature film (8–14 min)",
-      "Highlight film (3–4 min)",
-      "Full ceremony & speeches",
-      "Documentary photo coverage",
-      "Archive of all raw footage",
+      "Retouched selects (15–40)",
+      "Headshot and environmental sets",
+      "Web & print resolutions",
+      "Usage licence in writing",
+      "48-hour turnaround on selects",
     ],
     grade: "tungsten",
+  },
+  {
+    slug: "content-days",
+    index: "05",
+    title: "Content Days",
+    line: "One booked day. A month of posts.",
+    body:
+      "For businesses that know they should be posting and never have anything to post. We plan a shot list, spend a day making it, and you finish with enough photo and video to cover weeks — captioned, cropped and organised, not dumped in a folder for you to sort out.",
+    deliverables: [
+      "Full day of photo + video",
+      "30+ finished assets",
+      "Shot list planned in advance",
+      "Captions & platform crops",
+      "Organised, labelled delivery",
+    ],
+    grade: "teal",
   },
 ];
 
 /* ---------------------------------------------------------------------------
    PRICING
-   Named after record formats, because the client base is a music town and
-   "Tier 2" has never once made anyone want to book a shoot.
+   ⚠️ EVERY FIGURE HERE IS A PLACEHOLDER AND MUST BE REPLACED. ⚠️
 
-   Publishing a starting price is the single highest-leverage change a
-   production site can make: it filters out the enquiries that were never going
-   to close and it removes the awkward first call.
+   These are pitched at the market the live site describes — "small businesses,
+   musicians, and individuals" — not at labels or agencies. Publishing a
+   starting number is still the single highest-leverage change available,
+   because right now the site gives an enquirer no way to self-qualify at all.
+
+   Set them to whatever the real floor is. The structure works at any level.
    ------------------------------------------------------------------------- */
 
 export type Package = {
@@ -208,176 +213,186 @@ export type Package = {
 
 export const packages: Package[] = [
   {
-    name: "The Single",
-    format: "7-inch",
-    from: 2500,
-    line: "One shoot day. One finished piece.",
+    name: "The Session",
+    format: "Half day",
+    from: 450,
+    line: "One shoot. One set of deliverables.",
     includes: [
-      "Half or full shoot day",
-      "Director + operator",
-      "One hero deliverable",
-      "Three vertical cutdowns",
-      "Colour grade & sound mix",
+      "Up to 4 hours",
+      "Photo or video",
+      "20+ edited images",
+      "Vertical crops included",
+      "One round of revisions",
+      "One-week delivery",
+    ],
+    best: "A single event, a show, a headshot session, a first product shoot.",
+  },
+  {
+    name: "The Day",
+    format: "Full day",
+    from: 1200,
+    line: "A planned day, built to produce a lot.",
+    includes: [
+      "Up to 8 hours",
+      "Photo and video together",
+      "30+ finished assets",
+      "Shot list planned in advance",
+      "Highlight film included",
+      "Captions & platform crops",
       "Two rounds of revisions",
       "Two-week delivery",
     ],
-    best: "A launch, a single, a first proper film.",
-  },
-  {
-    name: "The EP",
-    format: "12-inch",
-    from: 6500,
-    line: "Multi-day, multi-deliverable. The usual answer.",
-    includes: [
-      "Two to three shoot days",
-      "Full crew (4–6)",
-      "Pre-production & treatment",
-      "Hero film + 8–12 social assets",
-      "Stills coverage throughout",
-      "Licensed music & sound design",
-      "Three rounds of revisions",
-      "Three-week delivery",
-    ],
-    best: "A campaign, a tour, a rebrand, a season of content.",
+    best: "Expos, content days, brand libraries, multi-set shows.",
     featured: true,
   },
   {
-    name: "The Album",
-    format: "Boxed set",
-    from: 15000,
-    line: "A body of work. Booked as a retainer or a run.",
+    name: "The Ongoing",
+    format: "Monthly",
+    from: 900,
+    line: "Booked every month, at a standing rate.",
     includes: [
-      "Four or more shoot days",
-      "Full department heads",
-      "Location scout & casting",
-      "Complete campaign asset library",
-      "Ongoing monthly content option",
-      "Priority scheduling all year",
-      "Unlimited revisions in scope",
-      "Named producer on your account",
+      "One shoot day per month",
+      "Priority on your dates",
+      "Rolling content library",
+      "Same-week social turnarounds",
+      "Consistent look across months",
+      "Rate held for the term",
     ],
-    best: "Labels, agencies, and brands who shoot every month.",
+    best: "Businesses that post constantly and are tired of scrambling.",
   },
 ];
 
 /* ---------------------------------------------------------------------------
-   PROCESS
-   Answers the anxiety every first-time client actually has, which is not
-   "what camera" but "what is going to happen to me".
+   PROCESS — ⚠️ drafted; confirm the durations are ones she can hold to.
    ------------------------------------------------------------------------- */
 
 export const process = [
   {
     step: "01",
-    title: "The call",
-    duration: "30 minutes",
+    title: "You get in touch",
+    duration: "Reply in 1 day",
     body:
-      "You tell us what the thing has to achieve. We tell you what it costs and whether we are the right studio for it — including when we are not. No deck, no discovery workshop, no invoice.",
+      "Tell me what the thing is, roughly when, and roughly what you can spend. I will tell you whether I am the right person for it and what it costs — including when the honest answer is that you do not need me.",
   },
   {
     step: "02",
-    title: "Treatment",
-    duration: "3–5 days",
+    title: "We plan it",
+    duration: "Before anything is booked",
     body:
-      "A written treatment with references, a shot approach, a schedule and a fixed quote. You are buying a plan before you buy a crew, so there is nothing to argue about on the day.",
+      "A shot list, a schedule and a fixed price in writing. For a brand or content day that means agreeing the looks in advance. For an event it means knowing what cannot be missed.",
   },
   {
     step: "03",
-    title: "Shoot",
-    duration: "1–4 days",
+    title: "I shoot it",
+    duration: "The day",
     body:
-      "Crew, gear, permits and catering handled. You show up and do your job. We run a quiet set — the single most underrated feature of a production company.",
+      "I turn up early, work around what is actually happening, and stay out of the way. Heat, rain, crowds and a schedule that has already slipped are normal conditions, not reasons the shoot went badly.",
   },
   {
     step: "04",
-    title: "Post",
-    duration: "2–3 weeks",
+    title: "I edit and grade",
+    duration: "48h for selects",
     body:
-      "Assembly, then a first cut for notes, then colour and sound. You get a review link where you can comment on the exact frame instead of writing 'around the middle bit'.",
+      "First selects come back within two days so you have something to post while it is still relevant. The full edit, colour and sound follow.",
   },
   {
     step: "05",
-    title: "Delivery",
-    duration: "Same week",
+    title: "You get everything",
+    duration: "1–2 weeks",
     body:
-      "Every master, every aspect ratio, every caption file, in a folder that is still there in three years. The raw footage is archived and yours to ask for.",
+      "Every file, every crop, organised and labelled — not a dump for you to sort out. Yours to use anywhere, for as long as you like.",
   },
 ] as const;
 
 /* ---------------------------------------------------------------------------
-   FAQ — the questions that otherwise become the first email
+   FAQ — ⚠️ answers drafted; several need Alex's real policy.
    ------------------------------------------------------------------------- */
 
 export const faqs = [
   {
-    q: "What does a project actually cost?",
-    a: "Most single-deliverable films land between $2,500 and $6,500. Campaigns with multiple shoot days and a full asset library run $6,500 to $15,000. Ongoing retainers start at $15,000. You will have a fixed quote in writing before anyone is booked — we do not send surprise invoices.",
+    q: "What does it cost?",
+    a: "Half-day sessions start at $450 and full days at $1,200, with monthly retainers from $900. You get a fixed price in writing before anything is booked — no surprise invoices and no hourly creep.",
   },
   {
-    q: "How far ahead do I need to book?",
-    a: "Three to four weeks is comfortable for a single shoot day. Campaigns want six to eight. That said, we hold space every month for fast-turn work — if you have a release date closing in, ask anyway.",
+    q: "How far ahead should I book?",
+    a: "Two to three weeks is comfortable. Events with fixed dates are worth locking in as early as you have them. If something is closing in fast, ask anyway — short-notice work is often possible.",
   },
   {
-    q: "Do you travel outside Nashville?",
-    a: "Constantly. Anywhere within a three-hour drive is billed as local. Beyond that we add travel at cost, with no markup, listed as its own line on the quote.",
+    q: "Do you travel?",
+    a: "⚠️ REPLACE — state the radius that is billed as local and how travel beyond it is charged. This is one of the three questions every enquirer asks and answering it in public removes a whole email exchange.",
   },
   {
-    q: "Who owns the footage?",
-    a: "You own the finished deliverables outright, in perpetuity, for any use. We keep the right to show the work in our portfolio — and if a project is under embargo or NDA, we simply do not. The raw footage is archived for three years and you can request it at any point.",
+    q: "Who owns the photos and video?",
+    a: "You do. Finished work is yours to use anywhere, for as long as you like. I keep the right to show it in my portfolio — and if a project is under embargo or you would rather I did not, I will not.",
   },
   {
-    q: "How fast is delivery?",
-    a: "Two weeks for a single deliverable, three for a campaign. Event sizzles go out within the same week and social clips within 24 hours, because a highlight reel that arrives a month later is a document, not marketing.",
+    q: "How fast do I get the files?",
+    a: "First selects within 48 hours so you have something to post while it still matters. Full galleries and finished video within one to two weeks depending on scope. Event social clips go out within 24 hours.",
   },
   {
-    q: "Can you work with our existing brand guidelines?",
-    a: "Yes, and we would rather. Send the guidelines, the fonts and any previous work at the enquiry stage. If the guidelines and the goal are in conflict, we will flag it in the treatment rather than discover it in the edit.",
+    q: "Do you shoot photo and video at the same time?",
+    a: "Yes, and for most events and content days that is the efficient way to buy both. It does need planning in from the start, because the two want different things from a schedule.",
   },
   {
-    q: "Do you shoot photo and video on the same day?",
-    a: "Yes — it is usually the most efficient way to buy both. It does need to be planned in from the start, because stills and motion want different lighting and we schedule dedicated time for each rather than stealing frames between takes.",
+    q: "What if it rains, or the venue is a nightmare?",
+    a: "Then it rains and the venue is a nightmare. Hot, humid, packed rooms with bad light are the normal working conditions for this kind of work — planning for them is part of the job, not a reason the shoot underdelivered.",
   },
   {
-    q: "What if we do not like the first cut?",
-    a: "That is what the first cut is for. Every package includes revision rounds, and notes on the assembly are expected, not a problem. If the direction is genuinely wrong we re-cut it — that risk sits with us, which is exactly why we spend so long on the treatment.",
+    q: "I have never hired a photographer before. Is that a problem?",
+    a: "No, and most of my clients hadn't either. You do not need a brief, a moodboard or the right words for what you want. Tell me what the thing is for and I will ask the rest.",
   },
 ] as const;
 
 /* ---------------------------------------------------------------------------
-   CLIENTS — logo strip
-   Replace with real client names before launch.
+   CLIENTS — taken from the live portfolio and testimonials.
+   ⚠️ Confirm each is happy to be named before launch.
    ------------------------------------------------------------------------- */
 
 export const clients = [
-  "Broadway Sound",
-  "Ryman Collective",
-  "East Nash Records",
-  "Cumberland Coffee",
-  "Third & Main",
-  "Harlan Whiskey",
-  "Belmont Studios",
-  "The Basement East",
-  "Silo Hospitality",
-  "Nashville Design Week",
+  "Renegade Pets",
+  "Smack Pet Food",
+  "Tomorrow's Problem",
 ] as const;
+
+/* ---------------------------------------------------------------------------
+   TESTIMONIALS
+   The first is REAL — reproduced from the live site, attributed as published.
+   The live site carries three; only one was legible in the reference material,
+   so the other two are marked for transcription from the existing carousel.
+   ------------------------------------------------------------------------- */
 
 export const testimonials = [
   {
     quote:
-      "We had booked three crews before Amrow and every one of them made the same film. These are the only people who asked what the song was about before they asked what the budget was.",
-    name: "Marcy Bell",
-    role: "Artist manager, East Nash Records",
+      "Alex isn't afraid to get down and dirty to get the pic when needed! We were at a massive event and it was hot, humid, raining intermittently, packed with people, food and drinks everywhere, and Alex was able to showcase our dog treat company in the mix of it all. She has a great eye and instinct for what needs to be done to give the photo/video a little extra umph! We cannot recommend AMRow Media enough, and would absolutely use her again!",
+    name: "Katie + Nick McPherson",
+    role: "Renegade Pets",
   },
   {
     quote:
-      "The brand film paid for itself in eleven days. I do not have a more sophisticated way of putting it than that.",
-    name: "Dev Chandra",
-    role: "Founder, Cumberland Coffee",
+      "⚠️ REPLACE — transcribe testimonial 2 of 3 from the current site's carousel.",
+    name: "⚠️ Name",
+    role: "⚠️ Company",
   },
   {
     quote:
-      "A quiet set with a nervous first-time artist is worth more than any camera on the truck. That is the thing I actually hire them for.",
-    name: "Tom Rieger",
-    role: "Label producer",
+      "⚠️ REPLACE — transcribe testimonial 3 of 3 from the current site's carousel.",
+    name: "⚠️ Name",
+    role: "⚠️ Company",
   },
+] as const;
+
+/* ---------------------------------------------------------------------------
+   SERVICE PROMISES
+   Shown as the numbers block on the home page. These are deliberately
+   commitments rather than career statistics — a solo operator's real
+   advantage is turnaround and continuity, and unlike "260 films delivered"
+   these are things Alex controls and can actually stand behind.
+   ------------------------------------------------------------------------- */
+
+export const promises = [
+  { value: "48h", label: "First selects, every time" },
+  { value: "1", label: "Person, start to finish" },
+  { value: "0", label: "Subcontractors, ever" },
+  { value: "24h", label: "Event clips, same day next" },
 ] as const;

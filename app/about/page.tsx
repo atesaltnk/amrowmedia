@@ -3,67 +3,73 @@ import { site } from "@/lib/site";
 import { Still } from "@/components/motion/still";
 import { Reveal, Split, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Parallax, ScrollFocus } from "@/components/motion/parallax";
-import { Marquee } from "@/components/motion/marquee";
 import { Cta } from "@/components/sections/cta";
 
 export const metadata: Metadata = {
-  title: "Studio",
+  title: "About",
   description:
-    "Amrow Media is a small video and photo production studio in Nashville, Tennessee. How we work, what we believe, and what is in the case.",
+    "AMRow Media is Alex — a photographer and videographer working with small businesses, musicians and individuals. One person, start to finish.",
   alternates: { canonical: "/about" },
 };
 
-/** What we believe — the part clients actually choose a studio on. */
+/**
+ * How I work — ⚠️ drafted from evidence on the live site and the Renegade Pets
+ * testimonial. Every one of these should be something Alex actually believes
+ * and would say out loud; edit freely.
+ *
+ * These are written in the first person on purpose. Being one person is the
+ * advantage here, not something to disguise with "we".
+ */
 const BELIEFS = [
   {
     n: "01",
-    title: "A quiet set is a feature",
-    body: "The best performance anyone gives is the one where they forgot the camera was there. That is a production discipline, not a personality trait, and it is the thing our clients cite most often.",
+    title: "Bad conditions are the job",
+    body: "Hot, humid, raining, packed with people — that is not a shoot going wrong, that is an event. I plan for it rather than apologising for it afterwards, and it is the thing clients bring up most when they recommend me.",
   },
   {
     n: "02",
-    title: "The argument comes before the shot list",
-    body: "We will not start talking about lenses until we agree on what the film has to make someone believe. A gorgeous film that wins nothing is the most expensive thing you can buy.",
+    title: "One person, start to finish",
+    body: "I shoot it, I edit it, I grade it, I deliver it. There is no account manager between you and the person holding the camera, and nobody is learning on your budget. What you saw in the portfolio is what you are hiring.",
   },
   {
     n: "03",
-    title: "Small crews, senior people",
-    body: "Everyone on your shoot has done this for years. There is no junior learning on your budget, and there is nobody standing around because the call sheet said there should be six of us.",
+    title: "You do not need the right words",
+    body: "Most of my clients have never hired a photographer before and feel like they should arrive with a brief and a moodboard. You do not. Tell me what the thing is for and I will ask the rest.",
   },
   {
     n: "04",
-    title: "We will tell you not to hire us",
-    body: "If the honest answer is that a film is the wrong spend right now, you will hear it on the first call. It costs us a job occasionally and it is the reason most of our work is repeat business.",
+    title: "Fast enough to still matter",
+    body: "First selects come back within 48 hours, because a highlight gallery that lands a month later is a keepsake, not marketing. You should be posting while people still remember being there.",
   },
 ];
 
-/** Kit. Clients rarely ask — but the ones who do, ask early and decide on it. */
+/** ⚠️ REPLACE with Alex's actual kit. Clients rarely ask — but the ones who
+ *  do, ask early and decide on it. */
 const KIT = [
-  "Sony FX6 / FX3 bodies",
-  "Sigma Cine primes",
-  "DZOFILM zooms",
-  "Aputure 600d / 300x",
-  "Astera tubes",
-  "DJI RS4 / Ronin",
-  "Sennheiser & Rode wireless",
-  "Sound Devices MixPre",
-  "DaVinci Resolve Studio",
-  "Calibrated grade suite",
+  "⚠️ Camera bodies",
+  "⚠️ Primes",
+  "⚠️ Zooms",
+  "⚠️ Lighting",
+  "⚠️ Audio",
+  "⚠️ Stabiliser",
+  "⚠️ Edit suite",
 ];
 
 export default function AboutPage() {
+  const hasLocation = Boolean(site.contact.city);
+
   return (
     <>
       <header className="px-gutter pb-20 pt-40">
         <div className="max-w-4xl">
           <Reveal>
             <span className="t-slate text-tungsten">
-              Studio — {site.contact.city}, {site.contact.regionName}
+              About — {site.name}
             </span>
           </Reveal>
           <Split
             as="h1"
-            text="A small studio that takes the work seriously and itself less so."
+            text="Hi, I'm Alex. I'm the whole company."
             className="t-h1 mt-6 text-balance"
           />
         </div>
@@ -76,6 +82,8 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
               <Parallax speed={0.09} className="h-full w-full">
                 <div className="h-[122%] w-full">
+                  {/* ⚠️ Replace with a portrait of Alex — this is the single
+                      most valuable image on the site for a solo operator. */}
                   <Still seed={202} grade="tungsten" />
                 </div>
               </Parallax>
@@ -84,18 +92,20 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-6 lg:pt-16">
+            {/* Her own words, from the live site. Kept as written — this is the
+                clearest statement of what she is for that exists anywhere. */}
             <Reveal>
               <p className="t-h3 text-balance">
-                We started in 2019 with one camera and a standing invitation to
-                film in the back room of a bar on Gallatin Avenue.
+                I&rsquo;m driven by the idea that every dream deserves to be
+                realized.
               </p>
             </Reveal>
 
             <div className="mt-8 flex flex-col gap-5">
               {[
-                "Seven years later the room is bigger, the kit is insured, and the invitation still stands. Most of what we shoot is still music — this is Nashville, and half the people we film have a guitar in the back of the car — but the work has grown into brand films, campaigns, live coverage and the kind of photography that clients used to buy from someone else.",
-                "What has not changed is the size. There are a small number of us and we all still go on the shoots. When you hire Amrow you get the people who made the reel, not their calendar and a subcontractor.",
-                "We are not trying to become an agency. We are trying to be the studio that a Nashville artist team or a good local business calls first, and keeps calling.",
+                "My motto captures my commitment to highlighting moments that matter. I focus on events, concerts, branding, and more, with a goal of empowering small businesses, musicians, and individuals to bring their visions to fruition.",
+                "Through exceptional videography and photography, I strive to tell your unique story and support you in taking those important initial steps toward your aspirations. Together, let's create captivating visuals that resonate and reflect your ideas beautifully.",
+                "In practice that means I work with people who are building something and do not yet have a marketing department. A dog treat company at their first big expo. A band with one van and a release date. A founder who needs a headshot that does not look like a headshot.",
               ].map((para, i) => (
                 <Reveal key={i} delay={i * 0.06}>
                   <p className="t-body max-w-xl">{para}</p>
@@ -113,11 +123,11 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <span className="t-slate text-ink-inverse-2">How we work</span>
+            <span className="t-slate text-ink-inverse-2">How I work</span>
           </Reveal>
           <Split
             as="h2"
-            text="Four things we actually believe."
+            text="Four things worth knowing before you book."
             className="t-h1 mt-6 text-balance"
           />
 
@@ -134,7 +144,7 @@ export default function AboutPage() {
           </Stagger>
         </div>
         <h2 id="beliefs-heading" className="sr-only">
-          How we work
+          How I work
         </h2>
       </section>
 
@@ -161,7 +171,7 @@ export default function AboutPage() {
       <section aria-labelledby="kit-heading" className="py-section">
         <div className="px-gutter">
           <Reveal>
-            <span className="t-slate text-tungsten">In the case</span>
+            <span className="t-slate text-tungsten">What I shoot on</span>
           </Reveal>
           <Reveal mode="focus">
             <h2 id="kit-heading" className="t-h2 mt-5 max-w-2xl text-balance">
@@ -169,67 +179,66 @@ export default function AboutPage() {
               anyway.
             </h2>
           </Reveal>
-        </div>
 
-        <div className="mt-14 border-y border-negative-edge py-8">
-          <Marquee duration={46} velocitySkew={false}>
+          <Stagger as="ul" className="mt-12 flex flex-wrap gap-2.5" stagger={0.05}>
             {KIT.map((item) => (
-              <span key={item} className="mx-6 flex items-center gap-6 whitespace-nowrap">
-                <span className="text-lg tracking-[-0.02em] text-ink-2">{item}</span>
-                <span className="h-1 w-1 rounded-full bg-tungsten" aria-hidden="true" />
-              </span>
+              <StaggerItem as="li" key={item}>
+                <span className="inline-block rounded-full border border-negative-edge px-4 py-2 text-[0.9375rem] text-ink-2">
+                  {item}
+                </span>
+              </StaggerItem>
             ))}
-          </Marquee>
-        </div>
+          </Stagger>
 
-        <div className="px-gutter">
           <Reveal>
             <p className="t-body mt-10 max-w-xl">
-              We own everything on that list, which means no rental day-rate on
-              your quote and no scrambling when a shoot moves. Anything more
-              specialist we bring in from the same three Nashville houses we
-              have used for years.
+              I own what I shoot on, which keeps rental off your quote and means
+              nothing falls apart when a date moves.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ---- Coverage ---- */}
-      <section
-        aria-labelledby="coverage-heading"
-        className="border-t border-negative-edge px-gutter py-section"
-      >
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <Reveal>
-              <span className="t-slate text-tungsten">Where we shoot</span>
-            </Reveal>
-            <Reveal mode="focus">
-              <h2 id="coverage-heading" className="t-h2 mt-5 text-balance">
-                Based in Nashville. Frequently not in Nashville.
-              </h2>
-            </Reveal>
+      {/* ---- Coverage ----
+           Renders only once a location is set in lib/site.ts. Until then the
+           section removes itself rather than shipping an empty heading. */}
+      {hasLocation && (
+        <section
+          aria-labelledby="coverage-heading"
+          className="border-t border-negative-edge px-gutter py-section"
+        >
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <Reveal>
+                <span className="t-slate text-tungsten">Where I shoot</span>
+              </Reveal>
+              <Reveal mode="focus">
+                <h2 id="coverage-heading" className="t-h2 mt-5 text-balance">
+                  Based in {site.contact.city}. Frequently not in{" "}
+                  {site.contact.city}.
+                </h2>
+              </Reveal>
+            </div>
+            <div className="lg:col-span-7">
+              <Stagger as="ul" className="flex flex-wrap gap-2.5" stagger={0.05}>
+                {site.serviceArea.map((area) => (
+                  <StaggerItem as="li" key={area}>
+                    <span className="inline-block rounded-full border border-negative-edge px-4 py-2 text-[0.9375rem] text-ink-2">
+                      {area}
+                    </span>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+              <Reveal delay={0.2}>
+                <p className="t-body mt-8 max-w-xl">
+                  Travel beyond the local radius goes on the quote at cost, as
+                  its own line.
+                </p>
+              </Reveal>
+            </div>
           </div>
-          <div className="lg:col-span-7">
-            <Stagger as="ul" className="flex flex-wrap gap-2.5" stagger={0.05}>
-              {site.serviceArea.map((area) => (
-                <StaggerItem as="li" key={area}>
-                  <span className="inline-block rounded-full border border-negative-edge px-4 py-2 text-[0.9375rem] text-ink-2">
-                    {area}
-                  </span>
-                </StaggerItem>
-              ))}
-            </Stagger>
-            <Reveal delay={0.2}>
-              <p className="t-body mt-8 max-w-xl">
-                Anything within three hours of the studio is billed as local.
-                Beyond that, travel goes on the quote at cost — no markup, no
-                mystery line item.
-              </p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <Cta />
     </>

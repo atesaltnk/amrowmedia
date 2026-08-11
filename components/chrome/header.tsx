@@ -80,7 +80,7 @@ export function Header() {
               AMROW
             </span>
             <span className="t-slate hidden text-ink-3 sm:inline">
-              {site.contact.city} · Est. 2019
+              {site.contact.city ? `${site.contact.city} · ` : ""}Photo &amp; Video
             </span>
           </Link>
 

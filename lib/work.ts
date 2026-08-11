@@ -1,14 +1,25 @@
 /* ============================================================================
    THE WORK
    ----------------------------------------------------------------------------
-   Each project is a case study, not a thumbnail. A production portfolio that
-   shows only pretty frames tells a prospective client that you can operate a
-   camera. Showing the brief, the constraint and the result tells them you can
-   be trusted with a budget — which is the actual purchase decision.
+   The biggest weakness of the current site is that the portfolio is a masonry
+   wall of images with no context. The photographs are good — a wrestler
+   mid-throw, two Rottweilers in a packed hall, a band under stage haze — but
+   an image on its own only proves you can operate a camera. Brief → constraint
+   → what I did → what they got is what proves you can be trusted with a
+   budget, and that is a different purchase decision.
 
-   ⚠️  These are structured placeholders with realistic shape. Replace `poster`
-       and `frames` with real stills, and `reel` with the real Vimeo/YouTube or
-       self-hosted MP4, before launch. See README → "Dropping in real assets".
+   These six are reconstructed from work visible in the live portfolio.
+
+   ⚠️  IMPORTANT — READ BEFORE LAUNCH
+   The `results` blocks below deliberately contain ONLY production facts:
+   what was shot, how long it took, what was delivered. They contain no
+   invented client business metrics — no revenue lifts, no engagement numbers,
+   no "sales doubled". Publishing fabricated performance figures next to a real
+   named client is a genuine liability, not just an inaccuracy.
+
+   Replace the narrative text with what actually happened. If a client will
+   confirm a real business outcome in writing, that is worth more than any of
+   this — put it in and mark it as theirs.
    ========================================================================== */
 
 export type Grade = "tungsten" | "teal" | "bleach" | "night";
@@ -19,241 +30,221 @@ export type Project = {
   client: string;
   category: string;
   year: number;
-  /** Short line for the index grid. */
   line: string;
-  /** The commercial problem. */
   brief: string;
-  /** What made it hard. Clients recognise their own constraints here. */
   constraint: string;
-  /** The creative answer. */
   approach: string;
-  /** Outcome. Numbers where they are real, plain language where they are not. */
   outcome: string;
-  /** Metrics shown as a row of stat blocks on the case study. */
+  /** Production facts only — never invented client business metrics. */
   results: { value: string; label: string }[];
   deliverables: string[];
   credits: { role: string; name: string }[];
-  /** Runtime of the hero deliverable, for VideoObject structured data. */
   runtime: string;
-  /** Colour grade — drives the generated still. */
   grade: Grade;
-  /** Deterministic seed for the procedural still. Change it to reshuffle. */
   seed: number;
   featured?: boolean;
 };
 
+const ALEX = "Alex — AMRow Media";
+
 export const projects: Project[] = [
   {
-    slug: "half-light-sessions",
-    title: "Half Light Sessions",
-    client: "East Nash Records",
-    category: "Live Session",
-    year: 2026,
-    line: "Four songs, one room, no second takes.",
+    slug: "renegade-pets-expo",
+    title: "Fierce, In The Wild",
+    client: "Renegade Pets",
+    category: "Events",
+    year: 2025,
+    line: "A dog treat brand, a packed expo floor, and weather that would not commit.",
     brief:
-      "A label with six new signings and no budget to shoot six music videos. They needed a format — something repeatable that made a new artist look established from the first frame.",
+      "Renegade Pets needed their booth and their product to look like a real brand in a hall full of competitors — not like a table with bags on it.",
     constraint:
-      "One evening per artist, in a working studio that could not be re-rigged between sessions. Every artist had to look distinct inside an identical space.",
+      "Hot, humid, raining on and off, and packed with people, food and drinks. Nothing could be staged and nothing could be moved. Every frame had to be found in the middle of a working event.",
     approach:
-      "We built the whole format around a single practical: one tungsten source that moves. Its position changes the room completely between artists without touching the grid, so each session reads as its own world while the schedule stays brutal and cheap. Four cameras, all locked, no coverage safety net — which forced the performances to carry it.",
+      "I worked the floor rather than the booth. Product shots were taken in real hands at real moments — a gift card held up mid-conversation, packaging behind a dog that had stopped to say hello — so the brand appears inside the day instead of being cut out of it. When the light turned flat I shot tighter and let the packaging carry the colour.",
     outcome:
-      "The format ran for six artists across three weeks. Two of the sessions out-performed the label's paid music video spend for the same quarter, on roughly a tenth of the budget.",
+      "A full gallery of event and product coverage the brand could use for retail, social and their own site, all from a single day on a floor that never stopped moving.",
     results: [
-      { value: "6", label: "Artists, one format" },
-      { value: "1.4M", label: "Combined views, first 90 days" },
-      { value: "−89%", label: "Cost per artist vs. prior video spend" },
+      { value: "1 day", label: "Single-day coverage" },
+      { value: "Photo + video", label: "Both, same day" },
+      { value: "24h", label: "First clips delivered" },
     ],
     deliverables: [
-      "4 × session films per artist",
-      "24 vertical performance cuts",
-      "Press stills per session",
-      "Format bible for future shoots",
+      "Full event gallery",
+      "Product & packaging frames",
+      "Vertical clips for social",
+      "Booth and crowd coverage",
     ],
     credits: [
-      { role: "Director", name: "Amrow Media" },
-      { role: "DP", name: "Amrow Media" },
-      { role: "Sound", name: "Broadway Sound" },
-      { role: "Colour", name: "Amrow Media" },
+      { role: "Photography", name: ALEX },
+      { role: "Video", name: ALEX },
+      { role: "Edit & grade", name: ALEX },
     ],
-    runtime: "PT3M42S",
-    grade: "tungsten",
+    runtime: "PT0M45S",
+    grade: "teal",
     seed: 11,
     featured: true,
   },
   {
-    slug: "cumberland-origin",
-    title: "Origin",
-    client: "Cumberland Coffee",
-    category: "Brand Film",
-    year: 2026,
-    line: "A founder story with no founder on camera.",
+    slug: "smack-product",
+    title: "Raw, Outdoors",
+    client: "Smack Pet Food",
+    category: "Branding & Product",
+    year: 2025,
+    line: "Packaging shot where the product is actually meant to make sense.",
     brief:
-      "A roastery opening its third location needed a film for the raise. The founder is a genuinely brilliant operator and a genuinely uncomfortable on-camera presence.",
+      "A raw dehydrated pet food brand needed product photography that did not look like every other bag photographed on a white sweep.",
     constraint:
-      "The obvious film — founder to camera, warm lighting, acoustic guitar — would have been actively worse than no film at all. And the pitch deadline was nineteen days out.",
+      "Two SKUs, bright saturated packaging, and a live dog. The packaging colour had to stay accurate for retail while sitting in dappled outdoor light that changes every ninety seconds.",
     approach:
-      "We cut the founder out of frame entirely and put her only in voiceover, recorded as a conversation rather than a read. On screen: hands, machines, the 4am load-in, the specific violence of a roast. The film argues that the business is a craft operation by showing craft, and never once says the word.",
+      "I shot on location with the dog in frame and the bags placed low, at the animal's level, so the product reads as part of a walk rather than a studio setup. Exposing for the packaging and letting the background fall away kept the brand colours true while the environment stayed soft and warm behind them.",
     outcome:
-      "Used as the opening asset in the raise. The round closed. It is now the film they show every new hire on day one, which was not what it was commissioned for and is probably the better outcome.",
+      "A set of product frames that work for retail listings, social and paid, all with a consistent look, from one outdoor session.",
     results: [
-      { value: "19 days", label: "Brief to final delivery" },
-      { value: "Closed", label: "Funding round it opened" },
-      { value: "0", label: "Seconds of founder on camera" },
+      { value: "2 SKUs", label: "Covered in one session" },
+      { value: "On location", label: "No studio hire" },
+      { value: "Multi-crop", label: "Retail, social, paid" },
     ],
     deliverables: [
-      "Hero film (2:10)",
-      "60s / 30s / 15s cutdowns",
-      "Vertical master",
-      "42 retouched stills",
+      "Product hero frames",
+      "Lifestyle and in-use shots",
+      "Retail-accurate colour",
+      "9:16, 4:5 and 1:1 crops",
     ],
     credits: [
-      { role: "Director", name: "Amrow Media" },
-      { role: "Producer", name: "Amrow Media" },
-      { role: "Sound design", name: "Broadway Sound" },
+      { role: "Photography", name: ALEX },
+      { role: "Retouch", name: ALEX },
     ],
-    runtime: "PT2M10S",
-    grade: "teal",
+    runtime: "PT0M00S",
+    grade: "tungsten",
     seed: 27,
     featured: true,
   },
   {
-    slug: "harlan-batch-no-4",
-    title: "Batch No. 4",
-    client: "Harlan Whiskey",
-    category: "Commercial",
+    slug: "tomorrows-problem-live",
+    title: "Tomorrow's Problem",
+    client: "Tomorrow's Problem",
+    category: "Concerts",
     year: 2025,
-    line: "One shoot day. Thirty-one assets. A quarter of paid media.",
+    line: "A set shot for the darkness rather than against it.",
     brief:
-      "A small distillery competing for feed attention against national spirits budgets. They needed volume without the work looking like volume.",
+      "The band needed live photographs and press stills they could actually release — not phone footage and not a flash-lit blowout.",
     constraint:
-      "A single day in the rickhouse, no talent budget, and a legal review process that touches every frame containing liquid.",
+      "House lighting only, no additional sources permitted, and no positions on stage. Whatever the venue was doing with colour was what I had to work with.",
     approach:
-      "We designed the day as a production line rather than a shoot: a fixed lighting state, a locked macro rig, and a run of forty product beats shot back to back — then a second pass with the same setups at a different exposure to double the usable grades. The variety in the final assets is entirely built in the edit, which is where variety is cheap.",
+      "I shot wide open and let the venue's own lighting state be the look, working the haze and the backlight instead of trying to correct them. A separate black and white pass gave the band a second, harder-edged set from the same night — same performance, completely different feel, no extra shoot.",
     outcome:
-      "Thirty-one finished assets from one day. Their cost per thousand impressions fell by just over a third against the previous quarter's creative.",
+      "Colour and monochrome sets from a single show, plus vertical cuts the band could post before the gear was packed.",
     results: [
-      { value: "31", label: "Finished assets, one day" },
-      { value: "−34%", label: "Cost per thousand impressions" },
-      { value: "3 mo", label: "Paid media covered" },
+      { value: "1 show", label: "Two complete sets" },
+      { value: "House light", label: "No added lighting" },
+      { value: "Same night", label: "First cuts posted" },
     ],
     deliverables: [
-      "31 social assets",
-      "6 hook variants for testing",
-      "9:16, 4:5, 1:1 masters",
-      "18 static frames for paid",
+      "Full set photography",
+      "Black and white press set",
+      "Vertical performance clips",
+      "Stage and crowd coverage",
     ],
     credits: [
-      { role: "Director", name: "Amrow Media" },
-      { role: "Food & liquid", name: "Third & Main" },
-      { role: "Colour", name: "Amrow Media" },
+      { role: "Photography", name: ALEX },
+      { role: "Video", name: ALEX },
     ],
-    runtime: "PT0M30S",
-    grade: "bleach",
+    runtime: "PT1M00S",
+    grade: "night",
     seed: 43,
     featured: true,
   },
   {
-    slug: "the-basement-east-live",
-    title: "Room of 400",
-    client: "The Basement East",
-    category: "Live & Events",
+    slug: "pet-expo-floor",
+    title: "The Floor",
+    client: "⚠️ Client name",
+    category: "Events",
     year: 2025,
-    line: "A sold-out night, delivered before the crowd got home.",
+    line: "Thousands of people, hundreds of dogs, one operator.",
     brief:
-      "A venue that sells out on reputation wanted to sell out on evidence. They needed the room to look, online, the way it feels at 11pm.",
+      "Convention-scale event coverage: exhibitors, attendees, competitions and the general feeling of a hall that is completely full.",
     constraint:
-      "No additional lighting permitted, no positions on the floor, and the sizzle had to be live before the audience finished posting their own phone footage.",
+      "A single operator covering a venue that would normally take a team, under mixed and unflattering overhead lighting, with subjects — many of them animals — who do not take direction.",
     approach:
-      "Four operators working entirely with the house lighting state, shooting for the darkness rather than fighting it. We cut on site between sets, so the first clip was public forty minutes after the encore and the full sizzle went out the same night.",
+      "I planned the day as a route rather than a shot list, sweeping the floor on a loop so no area went uncovered and returning to the busiest zones at their peak. With dogs the rule is to get low and wait; nearly every usable frame came from being at the animal's height and staying there longer than felt comfortable.",
     outcome:
-      "The venue's next three shows sold out in advance for the first time in two years. The format now runs monthly.",
+      "A gallery covering exhibitors, competitions and attendees that both the organiser and the individual stallholders could use.",
     results: [
-      { value: "40 min", label: "Encore to first clip live" },
-      { value: "3", label: "Consecutive advance sell-outs after" },
-      { value: "Monthly", label: "Format now runs" },
+      { value: "Full venue", label: "Single operator" },
+      { value: "Same week", label: "Gallery delivered" },
+      { value: "24h", label: "Social clips live" },
     ],
     deliverables: [
-      "Same-night sizzle (75s)",
-      "Full multi-cam set recording",
-      "12 social clips within 24h",
-      "Gallery of 60 stills",
+      "Full event gallery",
+      "Exhibitor and booth coverage",
+      "Competition and ring coverage",
+      "Social clips within 24 hours",
     ],
-    credits: [
-      { role: "Director", name: "Amrow Media" },
-      { role: "Camera", name: "Amrow Media ×4" },
-      { role: "Live sound", name: "Broadway Sound" },
-    ],
+    credits: [{ role: "Photography & video", name: ALEX }],
     runtime: "PT1M15S",
-    grade: "night",
+    grade: "bleach",
     seed: 58,
   },
   {
-    slug: "silo-portraits",
-    title: "The Silo Portraits",
-    client: "Silo Hospitality",
-    category: "Photography",
+    slug: "ring-night",
+    title: "Ring Night",
+    client: "⚠️ Client name",
+    category: "Events",
     year: 2025,
-    line: "Ninety staff portraits that do not look like staff portraits.",
+    line: "Live wrestling, shot from the floor, in one take each.",
     brief:
-      "A hospitality group rebranding around its people needed portraits of ninety employees across four venues, for web, print and recruitment.",
+      "Coverage of a live wrestling card staged inside a larger event — action frames the promotion and the performers could both use.",
     constraint:
-      "Six minutes per person, shot inside operating venues during service, with most subjects having never been photographed professionally and actively dreading it.",
+      "Unrepeatable action, a crowd on every side of the ring, and convention hall lighting that flattens everything it touches.",
     approach:
-      "A single portable lighting state rebuilt in each venue so the set is identical and the backgrounds are not. Then we stopped photographing people and started talking to them — every usable frame in the final set was taken while the subject was mid-sentence about something other than the photograph.",
+      "Shooting from low at the ring apron puts the performers against the ceiling rather than against the crowd, which separates them from a background that would otherwise swallow them. Fast shutter and continuous tracking through the whole sequence — the frame that works is usually a fifth of a second either side of the one you would have predicted.",
     outcome:
-      "Ninety portraits in four days. The group's application rate for open roles roughly doubled over the following quarter.",
+      "Peak-action stills for the promotion and individual performers, plus clips cut for the promotion's social channels.",
     results: [
-      { value: "90", label: "Portraits in 4 days" },
-      { value: "6 min", label: "Per subject, during service" },
-      { value: "≈2×", label: "Job application rate after" },
+      { value: "Live", label: "No second takes" },
+      { value: "Per performer", label: "Individual sets" },
+      { value: "Same week", label: "Full delivery" },
     ],
     deliverables: [
-      "90 retouched portraits",
-      "Full contact sheets",
-      "Web & print resolutions",
-      "Recruitment usage licence",
+      "Peak-action photography",
+      "Per-performer image sets",
+      "Vertical clips",
+      "Crowd and atmosphere frames",
     ],
-    credits: [
-      { role: "Photographer", name: "Amrow Media" },
-      { role: "Retouch", name: "Amrow Media" },
-    ],
-    runtime: "PT0M00S",
-    grade: "bleach",
+    credits: [{ role: "Photography & video", name: ALEX }],
+    runtime: "PT0M50S",
+    grade: "night",
     seed: 71,
   },
   {
-    slug: "ryman-collective-tour",
-    title: "Nine Cities",
-    client: "Ryman Collective",
-    category: "Music & Artist",
+    slug: "table-and-hands",
+    title: "Table & Hands",
+    client: "⚠️ Client name",
+    category: "Branding & Product",
     year: 2025,
-    line: "A tour documentary shot by two people in a van.",
+    line: "Food and craft work, shot close enough to feel.",
     brief:
-      "Nine dates, no tour videographer budget, and a label that wanted a documentary at the end of it rather than a folder of phone clips.",
+      "A set of images for hospitality and maker clients — grazing boards, prepared food, and documentary coverage of people working with their hands.",
     constraint:
-      "Two crew, total. Every frame had to be shot by people who were also driving, loading in, and sleeping in the van.",
+      "Food has a very short window before it stops looking like food, and craft work cannot be paused for the camera without the results looking posed.",
     approach:
-      "We built a kit that one person could carry in a single trip and shoot without a second op — one body, two primes, a recorder on the artist all day. The rule was that the camera never got set up: if a moment needed rigging, it was not the moment. The documentary is entirely made of things that happened whether we were there or not.",
+      "Everything shot tight and from above or just off it, so the frame is filled by texture rather than by table. For the maker work I switched to black and white and stopped directing entirely — hands, tools and concentration, photographed at working distance while the work carried on.",
     outcome:
-      "A 24-minute documentary and a year of social assets from a production cost lower than a single conventional shoot day.",
+      "A library of close, tactile frames that hospitality and maker clients can use across menus, social and their own sites.",
     results: [
-      { value: "24 min", label: "Finished documentary" },
-      { value: "9", label: "Cities, 2 crew" },
-      { value: "1 yr", label: "Social assets banked" },
+      { value: "Batch", label: "Multiple setups per day" },
+      { value: "Colour + B&W", label: "Two treatments" },
+      { value: "48h", label: "Selects returned" },
     ],
     deliverables: [
-      "Documentary (24 min)",
-      "Trailer (90s)",
-      "40+ social clips",
-      "Tour photography archive",
+      "Food and product frames",
+      "Documentary maker coverage",
+      "Black and white set",
+      "Web and print resolutions",
     ],
-    credits: [
-      { role: "Director", name: "Amrow Media" },
-      { role: "Camera & sound", name: "Amrow Media ×2" },
-      { role: "Edit", name: "Amrow Media" },
-    ],
-    runtime: "PT24M00S",
-    grade: "night",
+    credits: [{ role: "Photography", name: ALEX }],
+    runtime: "PT0M00S",
+    grade: "bleach",
     seed: 89,
   },
 ];

@@ -35,12 +35,15 @@ export function Footer() {
               >
                 {site.contact.email}
               </a>
-              <a
-                href={site.contact.phoneHref}
-                className="text-ink-2 transition-colors hover:text-tungsten"
-              >
-                {site.contact.phone}
-              </a>
+              {/* Omits itself rather than rendering an empty link. */}
+              {site.contact.phone && (
+                <a
+                  href={site.contact.phoneHref}
+                  className="text-ink-2 transition-colors hover:text-tungsten"
+                >
+                  {site.contact.phone}
+                </a>
+              )}
             </div>
           </div>
 
@@ -99,10 +102,15 @@ export function Footer() {
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="t-slate">
-            © {year} {site.legalName} · {site.contact.city}, {site.contact.region}
+            © {year} {site.legalName}
+            {site.contact.city
+              ? ` · ${site.contact.city}, ${site.contact.region}`
+              : ""}
           </p>
           <p className="t-slate">
-            Serving {site.serviceArea.slice(0, 4).join(" · ")}
+            {site.serviceArea.length
+              ? `Serving ${site.serviceArea.slice(0, 4).join(" · ")}`
+              : site.motto}
           </p>
         </div>
       </div>

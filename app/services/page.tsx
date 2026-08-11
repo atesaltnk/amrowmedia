@@ -10,7 +10,7 @@ import { Cta } from "@/components/sections/cta";
 export const metadata: Metadata = {
   title: "Services & rates",
   description:
-    "Video and photo production services from Amrow Media in Nashville — music videos, brand films, commercial and social campaigns, live event coverage, photography and weddings. Published starting rates.",
+    "Photo and video services from AMRow Media — events, concerts, branding and product, portraits and content days. Published starting rates.",
   alternates: { canonical: "/services" },
 };
 
@@ -30,7 +30,9 @@ export default function ServicesPage() {
         description: s.line,
         serviceType: s.title,
         provider: { "@type": "LocalBusiness", name: site.name, url: site.domain },
-        areaServed: { "@type": "City", name: site.contact.city },
+        ...(site.contact.city
+          ? { areaServed: { "@type": "City", name: site.contact.city } }
+          : {}),
       },
     })),
   };
@@ -52,8 +54,8 @@ export default function ServicesPage() {
           <Reveal delay={0.15}>
             <p className="t-lead mt-8 max-w-2xl text-pretty">
               Scope, deliverables and starting rates in public. If what you need
-              is not on this list, say so anyway — we would rather point you at
-              the right studio than take the job and learn on your budget.
+              is not on this list, ask anyway — I would rather point you at
+              someone better suited than take the job and learn on your budget.
             </p>
           </Reveal>
         </div>

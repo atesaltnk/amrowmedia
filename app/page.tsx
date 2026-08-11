@@ -11,10 +11,10 @@ import { Cta } from "@/components/sections/cta";
  * HOME
  *
  * The order is an argument, not a layout:
- *   Hero        — who we are, in one line
+ *   Hero        — who she is, in one line
  *   Clients     — and people already believe it
  *   Work        — here is the evidence
- *   Manifesto   — here is why it works
+ *   Manifesto   — here is the motto, and what it means in practice
  *   Services    — here is what you can buy
  *   Process     — here is what happens to you
  *   Testimonials— here is someone who is not us saying so

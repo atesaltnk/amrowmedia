@@ -93,7 +93,7 @@ export function ProcessStack() {
         index="03"
         eyebrow="How it goes"
         title={<span id="process-heading">Five steps. No surprises.</span>}
-        lead="The most common reason a production goes wrong is that nobody agreed what it was before the crew was booked. So we sell the plan first and the crew second."
+        lead="The most common reason a shoot goes wrong is that nobody agreed what it was before the day arrived. So the plan and the price are settled first, in writing."
       />
 
       <div ref={ref} className="relative mt-20" style={{ height: `${process.length * 88}vh` }}>

@@ -107,9 +107,10 @@ export function Pricing() {
       </Stagger>
 
       <Reveal delay={0.2}>
+        {/* ⚠️ Confirm both claims below before launch. */}
         <p className="t-body mx-auto mt-12 max-w-2xl text-center">
-          Non-profit, artist-owned and first-release projects get a standing
-          reduction — ask. Travel beyond three hours from Nashville is billed at
+          Non-profits, first releases and people just getting started get a
+          standing reduction — ask. Travel beyond the local radius is billed at
           cost with no markup, itemised on the quote.
         </p>
       </Reveal>

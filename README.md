@@ -1,6 +1,8 @@
-# Amrow Media
+# AMRow Media
 
-A production-ready website for **Amrow Media**, a Nashville video & photo production studio.
+A rebuild of [amrowmedia.com](https://amrowmedia.com) — the site of **Alex**, a
+photographer and videographer working with small businesses, musicians and
+individuals across events, concerts, branding and product work.
 
 Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion.
 
@@ -14,43 +16,56 @@ npm run build
 
 ## ⚠️ Read this first
 
-**The live amrowmedia.com could not be reached from the environment this was
-built in** — the outbound proxy blocks that host, and archive.org was blocked
-too. So this is **not** an audit of the existing site. It is a build against
-what this category of business demonstrably needs, from public signals
-(`@amrowmedia` on Instagram — Nashville videographer + photographer) and the
-brief: English, dark, cinematic.
+This is a rebuild of the live amrowmedia.com. The gap list below comes from
+reviewing the current site directly, so it is an actual audit — not guesswork.
 
-Two consequences:
+**What the current site gets right, and is preserved here:**
 
-1. **All copy, pricing, project case studies, client names, testimonials and
-   contact details are drafted placeholders.** They are realistic and
-   internally consistent so the site can be reviewed as a finished thing — but
-   every figure needs replacing with the studio's real numbers before launch.
-   Everything lives in two files: `lib/site.ts` and `lib/work.ts`.
-2. **The gap list below is a category checklist**, not a list of confirmed
-   faults on the current site. Tick off whatever is already handled.
+- **The motto.** *"Enhancing your dreams into reality"* is Alex's own line and
+  it anchors the manifesto section rather than being replaced.
+- **The about copy.** Her paragraph — *"I'm driven by the idea that every dream
+  deserves to be realized…"* — is reproduced verbatim on `/about`. It is the
+  clearest statement of what she is for that exists anywhere, and rewriting it
+  would have been vandalism.
+- **First-person voice.** The current site says "Follow **me** on Instagram."
+  AMRow Media is one person. That is an advantage over studios hiding behind
+  "we", and this build never breaks the "I".
+- **The Renegade Pets testimonial**, reproduced as published and attributed to
+  Katie + Nick McPherson.
+- **The dark palette.** The existing site is dark; so is this.
 
----
+**What still needs Alex:** every value marked `⚠️` in `lib/site.ts` and
+`lib/work.ts`. Chiefly: **the location** (see gap 5 — it is the single biggest
+one), the real prices, her kit list, testimonials 2 and 3, and the client names
+on three of the six case studies.
 
-## What a studio site in this category has to do
-
-Ranked by how much revenue each one moves. Every item is implemented here.
-
-| # | Gap | Why it costs money | Where it lives |
-|---|-----|--------------------|----------------|
-| 1 | **No published pricing** | The single biggest lead filter. Without it every enquiry starts with an awkward call, and the people who could never afford you still take up the slot. | `lib/site.ts → packages`, `/services#rates` |
-| 2 | **A DM link instead of a booking form** | An Instagram DM has no budget field, no timeline, no project type. Every enquiry needs three follow-ups before it's qualified. | `/contact`, `components/sections/enquiry-form.tsx` |
-| 3 | **Thumbnails instead of case studies** | Pretty frames prove you can run a camera. Brief → constraint → approach → outcome proves you can be trusted with a budget. Different purchase. | `/work/[slug]`, `lib/work.ts` |
-| 4 | **No LocalBusiness structured data** | Buyers search *"videographer near me."* Without JSON-LD the business is invisible to the map pack and to AI answer engines regardless of the work's quality. | `app/layout.tsx → StructuredData` |
-| 5 | **No process explained** | First-time clients aren't worried about your camera, they're worried about what happens to them. Silence here reads as risk. | Home → `ProcessStack`, five steps with real durations |
-| 6 | **No FAQ** | Ownership, turnaround, travel, revisions. Answering in public shortens the sales cycle *and* earns `FAQPage` rich results. | `components/sections/faq.tsx` |
-| 7 | **Media-heavy and slow** | A production site that takes eight seconds to load has disproven its own pitch before the reel plays. | No video files, no web fonts, no image requests — see *Performance* |
-| 8 | **No share cards** | Every link posted to Slack, iMessage or a group chat renders as a grey rectangle. | `app/opengraph-image.tsx`, generated at build |
-| 9 | **Motion that ignores accessibility** | A heavily animated site with no reduced-motion path is unusable for a real slice of visitors. | `hooks/use-reduced-motion.ts`, honoured in every component |
-| 10 | **No local SEO surface** | "Nashville" appears in the metadata, the JSON-LD, the service area list and the copy — not just in a logo. | `app/layout.tsx`, `lib/site.ts → serviceArea` |
+**On the case studies specifically:** the `results` blocks contain only
+production facts — what was shot, how long it took, what was delivered. They
+contain **no invented client business metrics**. Publishing a fabricated "sales
+doubled" next to a real named client like Renegade Pets would be a liability,
+not just an inaccuracy. If a client will confirm a real outcome in writing,
+that is worth more than anything drafted here.
 
 ---
+
+## Audit of the current site
+
+Ranked by how much revenue each one moves. Every item is addressed in this build.
+
+| # | What the live site does | Why it costs money | Fixed in |
+|---|---|---|---|
+| 1 | **No pricing anywhere** | An enquirer cannot self-qualify, so every lead starts with an awkward "what's your budget" exchange, and people who could never afford it still take up the slot. | `lib/site.ts → packages`, `/services#rates` |
+| 2 | **Contact is an email address and a "GET IN TOUCH" button** | No project type, no budget, no date. Every enquiry needs three follow-ups before it can be quoted. | `/contact` — qualifying form with inline validation |
+| 3 | **Portfolio is an uncaptioned masonry wall** | The photographs are genuinely good — a wrestler mid-throw, two Rottweilers in a packed hall — but an image alone only proves you can operate a camera. No client is named, so no visitor learns that Renegade Pets or Smack are clients. | `/work` + `/work/[slug]` case studies |
+| 4 | **No services page** | The hero pipe-list *"EVENTS \| CONCERTS \| BRANDING \| & MORE"* is the entire service description. Nobody can tell what they'd receive. | `/services` — 5 services, deliverables each |
+| 5 | **The site never says where she is** | **The biggest gap on the site.** This work is found by searching "event photographer near me". With no location there is no map pack, no local ranking, and no answer for an AI asked to recommend someone in a city. | `site.contact.city` — ⚠️ still needs filling |
+| 6 | **No process** | First-time clients — which she says is her market — are not worried about your camera, they're worried about what happens to them. Silence reads as risk. | Home → `ProcessStack` |
+| 7 | **No FAQ** | Cost, turnaround, travel and ownership get asked every single time. Answering publicly shortens the sales cycle *and* earns `FAQPage` rich results. | `components/sections/faq.tsx` |
+| 8 | **Testimonials are one-at-a-time behind small arrows** | The Renegade Pets quote is excellent and most visitors will never page to it. | Home → `Testimonials`, quote set at display size |
+| 9 | **"LET'S CONNECT" set over a busy floral image** | White text directly on high-contrast petals — legibility depends on which flower is behind which letter. | All type sits on a controlled scrim |
+| 10 | **No structured data** | Invisible to the map pack and to answer engines. | `LocalBusiness` / `Service` / `VideoObject` / `FAQPage` JSON-LD |
+| 11 | **Long centred serif paragraphs on mobile** | Line lengths run past comfortable reading measure. | `max-w-2xl` measures, left-aligned body |
+| 12 | **No share cards** | Every link posted to a group chat renders as a grey rectangle. | `app/opengraph-image.tsx` |
 
 ## The design system
 
@@ -67,7 +82,7 @@ cold half of the teal/orange grade every colourist reaches for.
 Type is the **system font stack**. That is a deliberate choice, not a shortcut:
 it ships optical sizing and legibility tuning, costs zero bytes, renders
 instantly, and causes no layout shift. Swap `--font-display` in
-`app/globals.css` if the studio licenses a face. Tracking is **size-specific** —
+`app/globals.css` if a face is licensed later. Tracking is **size-specific** —
 display text runs at `-0.042em` because letters read too far apart as they
 grow; mono metadata runs at `+0.14em` so it stays legible small.
 
@@ -82,7 +97,7 @@ the site from being "a dark template with orange buttons":
 | Scroll indicator | SMPTE timecode + a blinking REC dot that stops when scrolling stops. A progress bar in the client's own dialect. |
 | Hero entrance | Letterbox bars retract from the centre, like a projector masking to aspect. |
 | Section entrances | A **focus pull** — blur → sharp. A camera doesn't fade a subject in, it racks the focus ring. |
-| Work index | A photographer's contact sheet, sprocket ticks and all, with an irregular grid so six films don't look like one stock library. |
+| Work index | A photographer's contact sheet, sprocket ticks and all, with an irregular grid so six projects don't look like one stock library. |
 | Closing CTA | An iris opening — the mirror of the letterbox that opened the page. |
 | Grain | A static 4px noise tile. Correct texture for the subject, and it genuinely stops flat blacks banding on 6-bit panels. |
 
@@ -212,16 +227,24 @@ hooks/use-reduced-motion.ts # hydration-safe; use this one
 
 ## Pre-launch checklist
 
-- [ ] Replace every value in `lib/site.ts` — phone, email, address, hours, socials
-- [ ] Replace the six case studies in `lib/work.ts` with real projects
-- [ ] Confirm or change the three price tiers
-- [ ] Swap client names for real ones (or remove the strip)
-- [ ] Replace testimonials with attributed, permitted quotes
-- [ ] Add real stills and a hero reel (see *Dropping in real assets*)
-- [ ] Set `site.domain` to the production URL — metadata, canonicals, sitemap
-      and JSON-LD all derive from it
-- [ ] Set the real studio coordinates in `site.contact.geo`
+Everything marked `⚠️` in the codebase, in priority order:
+
+- [ ] **Set `site.contact.city` / `region` / `geo`** — biggest single win.
+      Unblocks the LocalBusiness structured data, which currently degrades to a
+      plain `Organization` rather than publishing an invalid empty address
+- [ ] Confirm or replace the three price tiers in `lib/site.ts → packages`
+- [ ] Answer the travel-radius FAQ (`faqs`, question 3)
+- [ ] Transcribe testimonials 2 and 3 from the current site's carousel
+- [ ] Add the real client names to the three case studies marked `⚠️`
+- [ ] Replace the case study narratives with what actually happened
+- [ ] Add a phone number, or leave `phone: ""` and those blocks stay hidden
+- [ ] Fill in the kit list on `/about`
+- [ ] Add a portrait of Alex on `/about` — for a solo operator this is the
+      single most valuable image on the site
+- [ ] Drop in real stills across the portfolio (see *Dropping in real assets*)
+- [ ] Set `site.domain` to the production URL
 - [ ] Configure `RESEND_API_KEY` and send a test enquiry
-- [ ] Validate the JSON-LD at [search.google.com/test/rich-results](https://search.google.com/test/rich-results)
+- [ ] Validate JSON-LD at [search.google.com/test/rich-results](https://search.google.com/test/rich-results)
 - [ ] Claim/verify the Google Business Profile — the JSON-LD supports it, it
       does not replace it
+- [ ] Confirm Renegade Pets, Smack and Tomorrow's Problem are happy to be named
