@@ -1,0 +1,383 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   AMROW MEDIA — DESIGN SYSTEM
+   ----------------------------------------------------------------------------
+   A cinema-native language. Every token maps to something real on a film set:
+   the tungsten key light, the teal shadow of a day-for-night grade, the black
+   of a matte box, the paper of a call sheet.
+
+   Two grades only. Everything on the site is one of them:
+     · NEGATIVE — near-black, the default. Footage lives here.
+     · PRINT    — warm paper. Used to interrupt the dark and reset the eye.
+   ========================================================================== */
+
+@theme {
+  /* --- Grade: NEGATIVE ---------------------------------------------------- */
+  --color-negative: #060607;
+  --color-negative-lift: #0d0e10;   /* "lifted blacks" — raised surfaces */
+  --color-negative-haze: #16181b;   /* cards, wells */
+  --color-negative-edge: #24272c;   /* hairlines */
+
+  /* --- Grade: PRINT ------------------------------------------------------- */
+  --color-print: #f4f1ea;
+  --color-print-dim: #e6e1d6;
+  --color-print-edge: #d4cec0;
+
+  /* --- Key light: tungsten. The single accent. ---------------------------- */
+  --color-tungsten: #ff8f3f;
+  --color-tungsten-soft: #ffb374;
+  --color-tungsten-deep: #c25f1c;
+
+  /* --- Fill light: the teal half of the teal/orange grade ----------------- */
+  --color-fill: #4bb3a5;
+  --color-fill-deep: #0f3d3a;
+
+  /* --- Ink on each grade -------------------------------------------------- */
+  --color-ink: #f4f1ea;
+  --color-ink-2: #a8a49c;           /* secondary copy on negative */
+  --color-ink-3: #6b6862;           /* captions, metadata */
+  --color-ink-inverse: #0d0e10;
+  --color-ink-inverse-2: #56534d;
+
+  /* --- Type ---------------------------------------------------------------
+     System stack by default: it ships optical sizing and legibility tuning,
+     costs zero bytes, and never causes a layout shift. Swap the display face
+     here if the studio adopts a licensed one. */
+  --font-display: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Helvetica Neue", "Inter", system-ui, sans-serif;
+  --font-body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", monospace;
+
+  /* --- Motion: Apple spring parameters, expressed as CSS easings ----------
+     Springs live in JS (lib/motion.ts). These are for non-gestural CSS only. */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-quint: cubic-bezier(0.64, 0, 0.78, 0);   /* mirror of the above */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- Rhythm -------------------------------------------------------------
+     A 4px base. Section padding scales with the viewport but never collapses. */
+  --spacing-gutter: clamp(1.25rem, 5vw, 5rem);
+  --spacing-section: clamp(6rem, 14vh, 11rem);
+}
+
+/* ============================================================================
+   BASE
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+  --grain-opacity: 0.026;
+  --scrollbar: var(--color-negative-edge);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Native smooth scrolling is the cheapest, most interruptible smooth scroll
+     there is — it hands off to the compositor and a wheel event cancels it
+     instantly. No scroll-hijacking library. */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-negative);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-tungsten);
+  color: var(--color-negative);
+}
+
+/* Focus: visible, on-brand, and never on mouse clicks. */
+:focus-visible {
+  outline: 2px solid var(--color-tungsten);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-negative);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-negative-edge);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-tungsten-deep);
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ----------------------------------------------------------------------------
+   Tracking is size-specific — it is never one value for every size. Display
+   text gets negative tracking because letters read too far apart as they grow;
+   small caps-y metadata gets positive tracking so it stays legible.
+   ========================================================================== */
+
+/* Reserved for the hero and the closing CTA — the two places on the site
+   allowed to shout. Anywhere else it swallows the viewport. */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 6.6vw, 6.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.042em;
+  font-optical-sizing: auto;
+}
+
+/* Page titles. Large, but a three-line heading still has to leave room for
+   the sentence underneath it. */
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4.4vw, 3.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 3.6vw, 3rem);
+  line-height: 1.06;
+  letter-spacing: -0.028em;
+}
+
+.t-h3 {
+  font-family: var(--font-display);
+  font-weight: 590;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.t-lead {
+  font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  color: var(--color-ink-2);
+}
+
+.t-body {
+  font-size: 1rem;
+  line-height: 1.65;
+  letter-spacing: -0.006em;
+  color: var(--color-ink-2);
+}
+
+/* Slate: the mono metadata voice. Named for the clapperboard. */
+.t-slate {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.t-slate-lg {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+   MATERIALS
+   ========================================================================== */
+
+/* Translucent chrome. Content scrolls *under* it, it never owns a fixed strip. */
+.material-chrome {
+  background: color-mix(in oklab, var(--color-negative) 62%, transparent);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  /* Bright top edge = light catching the material. */
+  border-bottom: 1px solid color-mix(in oklab, var(--color-print) 8%, transparent);
+}
+
+.material-card {
+  background: color-mix(in oklab, var(--color-negative-haze) 70%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-negative-edge);
+}
+
+/* A scroll edge effect instead of a hard 1px divider under floating chrome. */
+.edge-fade-top {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%);
+  mask-image: linear-gradient(to bottom, transparent, #000 12%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .material-chrome,
+  .material-card {
+    background: var(--color-negative-lift);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .material-chrome,
+  .material-card {
+    background: var(--color-negative);
+    border-color: var(--color-print-dim);
+  }
+  :root {
+    --color-ink-2: #d8d4cc;
+    --color-ink-3: #b0aca4;
+    --grain-opacity: 0;
+  }
+}
+
+/* ============================================================================
+   FILM STOCK — grain, halation, frame lines
+   ----------------------------------------------------------------------------
+   The grain is a single fixed 4px SVG tile at very low opacity. It costs one
+   composited layer and nothing per frame; it is what stops large flat blacks
+   from banding on cheap panels.
+   ========================================================================== */
+
+.film-grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  will-change: transform;
+}
+
+/* Halation: the warm bloom real film shows around a highlight. */
+.halation {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 50% at 50% 45%,
+    color-mix(in oklab, var(--color-tungsten) 16%, transparent),
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+}
+
+/* Vignette: pulls the eye to centre, exactly like a real lens falls off. */
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 100% at 50% 50%,
+    transparent 45%,
+    color-mix(in oklab, var(--color-negative) 60%, transparent) 100%
+  );
+}
+
+/* Frame lines: the ground-glass markings in a viewfinder. */
+.frame-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid color-mix(in oklab, var(--color-print) 10%, transparent);
+}
+
+/* ============================================================================
+   UTILITIES
+   ========================================================================== */
+
+.rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-negative-edge) 12%,
+    var(--color-negative-edge) 88%,
+    transparent
+  );
+}
+
+/* Text that reveals by pulling focus — see components/motion/focus-pull.tsx.
+   The blur is the whole point: a camera does not fade in, it racks focus. */
+.focus-pull-hidden {
+  filter: blur(14px);
+  opacity: 0;
+}
+
+/* Hide content visually but keep it for screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Marquee. Duration is set inline so each strip can run at its own pace. */
+@keyframes marquee-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  animation: marquee-x var(--marquee-duration, 40s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  .film-grain {
+    display: none;
+  }
+}
+
+/* The custom cursor replaces the native one only on real pointer devices. */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-hidden,
+  .cursor-hidden * {
+    cursor: none;
+  }
+}
